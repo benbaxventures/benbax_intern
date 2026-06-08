@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Benbax Internship Application — Software Development Interns 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  :root {
+    --green-dark: #0d3d1e;
+    --green-mid:  #1a5c2e;
+    --green-light:#2e8b4a;
+    --gold:       #f5c518;
+    --gold-dark:  #c9a10e;
+    --white:      #ffffff;
+    --off-white:  #f4f6f2;
+    --text:       #1a1a1a;
+    --muted:      #5a6a5e;
+    --border:     #c8d9cc;
+    --error:      #d63b3b;
+    --success:    #1a7a3f;
+    --radius:     10px;
+    --shadow:     0 4px 20px rgba(13,61,30,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 60px;
+  }
+
+  /* ── HEADER BANNER ── */
+  .banner {
+    background: var(--green-dark);
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+  }
+  .banner-stripe {
+    height: 6px;
+    background: linear-gradient(to right, #e8372b 33%, #f5c518 33%, #f5c518 66%, #2e8b4a 66%);
+  }
+  .banner-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 36px 28px 32px;
+    position: relative;
+    z-index: 1;
+  }
+  .banner-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .banner-logo-circle {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--green-dark);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(245,197,24,0.3);
+  }
+  .banner-brand {
+    display: flex; flex-direction: column;
+  }
+  .banner-brand-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--white);
+    letter-spacing: 0.06em;
+  }
+  .banner-brand-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .banner h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(26px, 5vw, 38px);
+    color: var(--white);
+    line-height: 1.15;
+  }
+  .banner h1 span { color: var(--gold); }
+  .banner-desc {
+    margin-top: 10px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+  }
+  .badge-remote {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    background: var(--gold);
+    color: var(--green-dark);
+    font-weight: 700;
+    font-size: 12px;
+    padding: 5px 14px;
+    border-radius: 30px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .banner-bg-code {
+    position: absolute;
+    right: -20px; top: 10px;
+    font-family: monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.04);
+    line-height: 1.7;
+    user-select: none;
+    pointer-events: none;
+    white-space: pre;
+  }
+
+  /* ── FORM CARD ── */
+  .form-wrap {
+    max-width: 720px;
+    margin: 32px auto 0;
+    padding: 0 16px;
+  }
+  .section-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    border-top: 4px solid var(--green-mid);
+  }
+  .section-card:first-child { border-top-color: var(--gold); }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--green-mid);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── FIELDS ── */
+  .field-group { margin-bottom: 20px; }
+  .field-group:last-child { margin-bottom: 0; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 540px) { .field-row { grid-template-columns: 1fr; } }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+  }
+  label .req { color: var(--error); margin-left: 2px; }
+  label .hint {
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 12px;
+    margin-left: 4px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--white);
+    transition: border-color 0.18s, box-shadow 0.18s;
+    outline: none;
+    appearance: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--green-mid);
+    box-shadow: 0 0 0 3px rgba(46,139,74,0.12);
+  }
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.6;
+  }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a6a5e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  /* Checkbox & Radio */
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .option-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    font-size: 13.5px;
+  }
+  .option-item:hover { border-color: var(--green-light); background: #f0faf3; }
+  .option-item input[type="checkbox"],
+  .option-item input[type="radio"] {
+    width: 16px; height: 16px;
+    accent-color: var(--green-mid);
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+  }
+  .option-item input:checked + span { font-weight: 600; color: var(--green-dark); }
+  .option-item:has(input:checked) { border-color: var(--green-mid); background: #edf7f1; }
+
+  /* Star rating */
+  .star-row { display: flex; gap: 6px; margin-top: 4px; }
+  .star-label {
+    display: flex; flex-direction: column; align-items: center;
+    cursor: pointer;
+    gap: 3px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .star-label input { display: none; }
+  .star-label .star-icon {
+    font-size: 28px;
+    line-height: 1;
+    color: #ccc;
+    transition: color 0.12s, transform 0.12s;
+  }
+  .star-label:hover .star-icon,
+  .star-label input:checked ~ .star-icon { color: var(--gold); transform: scale(1.15); }
+
+  /* File */
+  .file-area {
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    padding: 22px 18px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.18s, background 0.18s;
+    position: relative;
+    margin-top: 4px;
+  }
+  .file-area:hover { border-color: var(--green-mid); background: #f4fcf6; }
+  .file-area input[type="file"] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer;
+    width: 100%; height: 100%;
+    padding: 0; border: none;
+  }
+  .file-area .file-icon { font-size: 30px; margin-bottom: 6px; }
+  .file-area p { font-size: 13px; color: var(--muted); }
+  .file-area strong { color: var(--green-mid); }
+
+  /* Disclaimer box */
+  .disclaimer {
+    background: #f0faf3;
+    border: 1.5px solid #b0ddb9;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .disclaimer strong { color: var(--green-dark); }
+
+  /* Submit */
+  .submit-area {
+    text-align: center;
+    padding: 10px 0 0;
+  }
+  .btn-submit {
+    background: var(--green-dark);
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+    border: none;
+    border-radius: 50px;
+    padding: 16px 52px;
+    cursor: pointer;
+    transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+    box-shadow: 0 6px 20px rgba(13,61,30,0.25);
+    text-transform: uppercase;
+  }
+  .btn-submit:hover {
+    background: var(--green-mid);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(13,61,30,0.3);
+  }
+  .btn-submit:active { transform: translateY(0); }
+  .submit-note {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .submit-note a { color: var(--green-mid); }
+
+  /* Success screen */
+  #success-screen {
+    display: none;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 60px 32px;
+    text-align: center;
+    max-width: 720px;
+    margin: 32px auto 0;
+  }
+  .success-icon { font-size: 60px; margin-bottom: 16px; }
+  .success-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--green-dark);
+    margin-bottom: 10px;
+  }
+  .success-msg { color: var(--muted); font-size: 15px; line-height: 1.6; }
+  .success-highlight { color: var(--green-mid); font-weight: 600; }
+
+  /* validation */
+  input.invalid, select.invalid, textarea.invalid {
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px rgba(214,59,59,0.1);
+  }
+  .err-msg {
+    font-size: 11.5px;
+    color: var(--error);
+    margin-top: 4px;
+    display: none;
+  }
+  .err-msg.show { display: block; }
+
+  /* progress bar */
+  .progress-bar-wrap {
+    max-width: 720px;
+    margin: 20px auto 0;
+    padding: 0 16px;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .progress-track {
+    height: 5px;
+    background: #dde8e0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--green-mid), var(--gold));
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  /* ── SETUP GUIDE ── */
+  #setup-guide {
+    display: none;
+    background: #fff8e1;
+    border-bottom: 3px solid var(--gold);
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  }
+  .setup-guide-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 18px 20px 20px;
+  }
+  .setup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .setup-header h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #6b4500;
+    margin: 0;
+  }
+  .setup-close {
+    background: none;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+    color: #6b4500;
+    padding: 2px 6px;
+    border-radius: 4px;
+    line-height: 1;
+  }
+  .setup-close:hover { background: rgba(0,0,0,0.07); }
+  .setup-intro {
+    font-size: 12.5px;
+    color: #7a5800;
+    margin-bottom: 14px;
+    line-height: 1.55;
+  }
+  .setup-steps { display: flex; flex-direction: column; gap: 10px; }
+  .setup-step {
+    display: flex;
+    gap: 11px;
+    align-items: flex-start;
+    background: rgba(255,255,255,0.72);
+    padding: 11px 13px;
+    border-radius: 8px;
+    border: 1px solid rgba(245,197,24,0.45);
+  }
+  .step-num {
+    background: var(--gold);
+    color: var(--green-dark);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .setup-step-content strong {
+    display: block;
+    font-size: 12.5px;
+    color: #3d2d00;
+    margin-bottom: 3px;
+  }
+  .setup-step-content p {
+    font-size: 12px;
+    color: #7a5800;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .setup-step-content a { color: #1a5c2e; font-weight: 600; }
+  .setup-step-content code {
+    background: rgba(0,0,0,0.09);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 11.5px;
+    color: #3d2d00;
+  }
+  .setup-note {
+    margin-top: 12px;
+    background: rgba(46,139,74,0.1);
+    border: 1px solid rgba(46,139,74,0.25);
+    border-radius: 8px;
+    padding: 9px 13px;
+    font-size: 12px;
+    color: var(--green-mid);
+    font-weight: 500;
+  }
+  .btn-toggle-tpl {
+    margin-top: 8px;
+    background: none;
+    border: 1.5px solid #c9a10e;
+    color: #7a5800;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: background 0.14s;
+  }
+  .btn-toggle-tpl:hover { background: rgba(245,197,24,0.15); }
+  .btn-copy-tpl {
+    background: var(--green-dark);
+    color: #fff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    margin-bottom: 8px;
+    transition: background 0.15s;
+  }
+  .btn-copy-tpl:hover { background: var(--green-mid); }
+  .template-code {
+    background: #0d1117;
+    color: #a5d6a7;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 10.5px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 180px;
+    overflow-y: auto;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(120px);
+    background: #1a1a1a;
+    color: #fff;
+    padding: 13px 24px;
+    border-radius: 30px;
+    font-size: 13.5px;
+    font-weight: 500;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+    z-index: 9999;
+    transition: transform 0.32s cubic-bezier(0.34,1.56,0.64,1);
+    max-width: 88vw;
+    text-align: center;
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast.error   { background: #b71c1c; }
+  .toast.success { background: #1a5c2e; }
+
+  /* ── BUTTON LOADING STATE ── */
+  .btn-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255,255,255,0.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 7px;
+    margin-bottom: 2px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .btn-submit:disabled {
+    opacity: 0.72;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     ADMIN SETUP GUIDE — hidden once EmailJS is configured
+     ══════════════════════════════════════════════════════════ -->
+<div id="setup-guide">
+  <div class="setup-guide-inner">
+    <div class="setup-header">
+      <h3>⚙️ Admin Setup Required — EmailJS Not Yet Configured</h3>
+      <button class="setup-close" onclick="document.getElementById('setup-guide').style.display='none'" title="Dismiss">✕</button>
+    </div>
+    <p class="setup-intro">Follow these 5 steps to wire up Gmail. Takes about 5 minutes. Once done, every application is emailed directly to <strong>benbaxventures@gmail.com</strong>.</p>
+    <div class="setup-steps">
+
+      <div class="setup-step">
+        <span class="step-num">1</span>
+        <div class="setup-step-content">
+          <strong>Create a free EmailJS account</strong>
+          <p>Go to <a href="https://www.emailjs.com" target="_blank">emailjs.com</a> → click <b>Sign Up Free</b> → register with your Gmail.</p>
+        </div>
+      </div>
+
+      <div class="setup-step">
+        <span class="step-num">2</span>
+        <div class="setup-step-content">
+          <strong>Connect your Gmail as an Email Service</strong>
+          <p><b>Email Services</b> tab → <b>Add New Service</b> → choose <b>Gmail</b> → authorise <code>benbaxventures@gmail.com</code> → <b>Create Service</b>. Copy the <b>Service ID</b> (e.g. <code>service_abc1234</code>).</p>
+        </div>
+      </div>
+
+      <div class="setup-step">
+        <span class="step-num">3</span>
+        <div class="setup-step-content">
+          <strong>Create an Email Template</strong>
+          <p><b>Email Templates</b> tab → <b>Create New Template</b> → set <b>Subject</b> to <code>New Application – &#123;&#123;applicant_name&#125;&#125;</code> → switch Content to <b>HTML editor</b>, delete everything, paste the template below → <b>Save</b>. Copy the <b>Template ID</b> (e.g. <code>template_xyz5678</code>).</p>
+          <button id="toggle-template-btn" class="btn-toggle-tpl" onclick="toggleTemplate()">▼ Show email template HTML to copy</button>
+          <div id="template-box" style="display:none;margin-top:10px">
+            <button id="copy-template-btn" class="btn-copy-tpl" onclick="copyEmailTemplate()">📋 Copy Template HTML</button>
+            <pre id="email-template-code" class="template-code"></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="setup-step">
+        <span class="step-num">4</span>
+        <div class="setup-step-content">
+          <strong>Get your Public Key</strong>
+          <p>Click your <b>Account</b> avatar (top-right) → <b>General</b> tab → copy your <b>Public Key</b> (e.g. <code>AbCdEfGhIjK123</code>).</p>
+        </div>
+      </div>
+
+      <div class="setup-step">
+        <span class="step-num">5</span>
+        <div class="setup-step-content">
+          <strong>Paste the 3 values into this file &amp; host it</strong>
+          <p>Open <code>benbax_internship_application.html</code> in VS Code → scroll to the bottom → find the <code>EMAILJS CONFIGURATION</code> block → replace <code>YOUR_PUBLIC_KEY</code>, <code>YOUR_SERVICE_ID</code>, and <code>YOUR_TEMPLATE_ID</code> with your real values → save → this panel disappears and the form is live. Host for free on <a href="https://netlify.com/drop" target="_blank">Netlify Drop</a> (drag &amp; drop the file).</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="setup-note">✅ <strong>Free tier:</strong> 200 emails / month &nbsp;·&nbsp; No credit card &nbsp;·&nbsp; Delivered to benbaxventures@gmail.com</div>
+  </div>
+</div>
+
+<!-- BANNER -->
+<div class="banner">
+  <div class="banner-stripe"></div>
+  <div class="banner-inner">
+    <div class="banner-logo-row">
+      <div class="banner-logo-circle">BB</div>
+      <div class="banner-brand">
+        <span class="banner-brand-name">BENBAX</span>
+        <span class="banner-brand-sub">Ventures Company Limited</span>
+      </div>
+    </div>
+    <h1>Software Development<br><span>Internship</span> Application</h1>
+    <p class="banner-desc">Apply to join our team and build powerful web applications, work on real-world projects, and grow your career in tech.</p>
+    <span class="badge-remote">🌐 100% Remote · Ghana</span>
+    <div class="banner-bg-code">const future = await benbax.hire(you);
+if (future.status === "hired") {
+  future.build(); future.learn(); future.grow();
+}</div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-bar-wrap">
+  <div class="progress-label">
+    <span>Application Progress</span>
+    <span id="prog-pct">0%</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="form-wrap" id="form-container">
+  <form id="appForm" novalidate>
+
+    <!-- 1. Personal Info -->
+    <div class="section-card">
+      <div class="section-title">01 · Personal Information</div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label for="fname">First Name <span class="req">*</span></label>
+          <input type="text" id="fname" name="fname" placeholder="e.g. Kwame" required />
+          <span class="err-msg" id="err-fname">Please enter your first name.</span>
+        </div>
+        <div class="field-group">
+          <label for="lname">Last Name <span class="req">*</span></label>
+          <input type="text" id="lname" name="lname" placeholder="e.g. Asante" required />
+          <span class="err-msg" id="err-lname">Please enter your last name.</span>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label for="email">Email Address <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          <span class="err-msg" id="err-email">Please enter a valid email.</span>
+        </div>
+        <div class="field-group">
+          <label for="phone">Phone / WhatsApp <span class="req">*</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="+233 XX XXX XXXX" required />
+          <span class="err-msg" id="err-phone">Please enter your phone number.</span>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label for="location">City / Region <span class="req">*</span></label>
+          <input type="text" id="location" name="location" placeholder="e.g. Accra, Greater Accra" required />
+          <span class="err-msg" id="err-location">Please enter your location.</span>
+        </div>
+        <div class="field-group">
+          <label for="age-group">Age Group <span class="req">*</span></label>
+          <select id="age-group" name="age-group" required>
+            <option value="" disabled selected>Select age range</option>
+            <option>Under 18</option>
+            <option>18 – 22</option>
+            <option>23 – 27</option>
+            <option>28 – 32</option>
+            <option>33 and above</option>
+          </select>
+          <span class="err-msg" id="err-age-group">Please select your age group.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Education & Background -->
+    <div class="section-card">
+      <div class="section-title">02 · Education &amp; Background</div>
+
+      <div class="field-group">
+        <label for="education">Highest Level of Education <span class="req">*</span></label>
+        <select id="education" name="education" required>
+          <option value="" disabled selected>Select level</option>
+          <option>High School / SHS</option>
+          <option>HND / Diploma</option>
+          <option>Bachelor's Degree (ongoing)</option>
+          <option>Bachelor's Degree (completed)</option>
+          <option>Master's Degree or above</option>
+          <option>Self-taught / Bootcamp</option>
+        </select>
+        <span class="err-msg" id="err-education">Please select your education level.</span>
+      </div>
+
+      <div class="field-group">
+        <label for="school">School / Institution <span class="hint">(if applicable)</span></label>
+        <input type="text" id="school" name="school" placeholder="e.g. University of Ghana, KNUST" />
+      </div>
+
+      <div class="field-group">
+        <label for="program">Program / Course of Study <span class="hint">(if applicable)</span></label>
+        <input type="text" id="program" name="program" placeholder="e.g. BSc Computer Science" />
+      </div>
+
+      <div class="field-group">
+        <label for="experience">Years of Coding Experience <span class="req">*</span></label>
+        <select id="experience" name="experience" required>
+          <option value="" disabled selected>Select range</option>
+          <option>Less than 6 months</option>
+          <option>6 months – 1 year</option>
+          <option>1 – 2 years</option>
+          <option>2 – 4 years</option>
+          <option>4+ years</option>
+        </select>
+        <span class="err-msg" id="err-experience">Please select your experience.</span>
+      </div>
+    </div>
+
+    <!-- 3. Technical Skills -->
+    <div class="section-card">
+      <div class="section-title">03 · Technical Skills</div>
+
+      <div class="field-group">
+        <label>Which area best describes you? <span class="req">*</span></label>
+        <div class="options-grid" style="grid-template-columns: repeat(auto-fill, minmax(150px,1fr));">
+          <label class="option-item"><input type="radio" name="dev-role" value="Frontend" required /><span>🎨 Frontend</span></label>
+          <label class="option-item"><input type="radio" name="dev-role" value="Backend" /><span>⚙️ Backend</span></label>
+          <label class="option-item"><input type="radio" name="dev-role" value="Full Stack" /><span>🔄 Full Stack</span></label>
+          <label class="option-item"><input type="radio" name="dev-role" value="Still Learning" /><span>📚 Still Learning</span></label>
+        </div>
+        <span class="err-msg" id="err-dev-role">Please select a role.</span>
+      </div>
+
+      <div class="field-group">
+        <label>Languages / Technologies you know <span class="req">*</span><span class="hint">(check all that apply)</span></label>
+        <div class="options-grid">
+          <label class="option-item"><input type="checkbox" name="tech" value="HTML/CSS" /><span>HTML / CSS</span></label>
+          <label class="option-item"><input type="checkbox" name="tech" value="JavaScript" /><span>JavaScript</span></label>
+          <label class="option-item"><input type="checkbox" name="tech" value="TypeScript" /><span>TypeScript</span></label>
+          <label class="option-item"><input type="checkbox" name="tech" value="React" /><span>React</span></label>
+          <label class="option-item"><input type="checkbox" name="tech" value="Next.js" /><span>Next.js</span></label>
+          <label class="option-item"><input type="checkbox" name="tech" value="Vue.js" /><span>Vue.js</span></label>
+          <label class="option-item"><input type="checkbox" name="tech" value="Node.js" /><span>Node.js</span></label>
+          <label class="option-item"><input type="checkbox" name="tech" value="Python" /><span>Python</span></label>
+          <label class="option-item"><input type="checkbox" name="tech" value="PHP" /><span>PHP</span></label>
+          <label class="option-item"><input type="checkbox" name="tech" value="SQL / MySQL" /><span>SQL / MySQL</span></label>
+          <label class="option-item"><input type="checkbox" name="tech" value="MongoDB" /><span>MongoDB</span></label>
+          <label class="option-item"><input type="checkbox" name="tech" value="Firebase" /><span>Firebase</span></label>
+          <label class="option-item"><input type="checkbox" name="tech" value="REST APIs" /><span>REST APIs</span></label>
+          <label class="option-item"><input type="checkbox" name="tech" value="Git / GitHub" /><span>Git / GitHub</span></label>
+        </div>
+        <span class="err-msg" id="err-tech">Please select at least one technology.</span>
+      </div>
+
+      <div class="field-group">
+        <label>AI Tools you use for coding &amp; productivity <span class="hint">(check all that apply)</span></label>
+        <div class="options-grid">
+          <label class="option-item"><input type="checkbox" name="ai-tools" value="ChatGPT" /><span>ChatGPT</span></label>
+          <label class="option-item"><input type="checkbox" name="ai-tools" value="Claude" /><span>Claude</span></label>
+          <label class="option-item"><input type="checkbox" name="ai-tools" value="GitHub Copilot" /><span>GitHub Copilot</span></label>
+          <label class="option-item"><input type="checkbox" name="ai-tools" value="Cursor" /><span>Cursor</span></label>
+          <label class="option-item"><input type="checkbox" name="ai-tools" value="Gemini" /><span>Gemini</span></label>
+          <label class="option-item"><input type="checkbox" name="ai-tools" value="v0 by Vercel" /><span>v0 by Vercel</span></label>
+          <label class="option-item"><input type="checkbox" name="ai-tools" value="None yet" /><span>None yet</span></label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Rate your JavaScript proficiency</label>
+        <div class="star-row">
+          <label class="star-label"><input type="radio" name="js-level" value="1"/><span class="star-icon">★</span>Beginner</label>
+          <label class="star-label"><input type="radio" name="js-level" value="2"/><span class="star-icon">★</span>Basic</label>
+          <label class="star-label"><input type="radio" name="js-level" value="3"/><span class="star-icon">★</span>Intermediate</label>
+          <label class="star-label"><input type="radio" name="js-level" value="4"/><span class="star-icon">★</span>Advanced</label>
+          <label class="star-label"><input type="radio" name="js-level" value="5"/><span class="star-icon">★</span>Expert</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Portfolio & Links -->
+    <div class="section-card">
+      <div class="section-title">04 · Portfolio &amp; Links</div>
+
+      <div class="field-group">
+        <label for="github">GitHub Profile URL <span class="hint">(optional but highly recommended)</span></label>
+        <input type="url" id="github" name="github" placeholder="https://github.com/yourusername" />
+      </div>
+
+      <div class="field-group">
+        <label for="portfolio">Portfolio / Personal Website <span class="hint">(optional)</span></label>
+        <input type="url" id="portfolio" name="portfolio" placeholder="https://yourportfolio.com" />
+      </div>
+
+      <div class="field-group">
+        <label for="linkedin">LinkedIn Profile <span class="hint">(optional)</span></label>
+        <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourname" />
+      </div>
+
+      <div class="field-group">
+        <label for="project-desc">Describe a project you've built <span class="req">*</span></label>
+        <textarea id="project-desc" name="project-desc" placeholder="Tell us what you built, the tech you used, and what problem it solved. Even small or learning projects count!" required></textarea>
+        <span class="err-msg" id="err-project-desc">Please describe a project you've worked on.</span>
+      </div>
+
+      <div class="field-group">
+        <label>Upload CV / Resume <span class="hint">(PDF or Word, max 5MB)</span></label>
+        <div class="file-area">
+          <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx"/>
+          <div class="file-icon">📄</div>
+          <p><strong>Click to upload</strong> or drag & drop your CV here</p>
+          <p style="margin-top:4px; font-size:12px;">PDF, DOC or DOCX · Max 5MB</p>
+        </div>
+        <div id="file-name" style="margin-top:8px;font-size:13px;color:var(--green-mid);display:none;"></div>
+      </div>
+    </div>
+
+    <!-- 5. Motivation -->
+    <div class="section-card">
+      <div class="section-title">05 · Motivation &amp; Availability</div>
+
+      <div class="field-group">
+        <label for="why-benbax">Why do you want to join Benbax? <span class="req">*</span></label>
+        <textarea id="why-benbax" name="why-benbax" style="min-height:120px;" placeholder="Tell us what excites you about this opportunity and what you hope to learn or contribute." required></textarea>
+        <span class="err-msg" id="err-why-benbax">Please tell us why you want to join Benbax.</span>
+      </div>
+
+      <div class="field-group">
+        <label for="hours">How many hours per week are you available? <span class="req">*</span></label>
+        <select id="hours" name="hours" required>
+          <option value="" disabled selected>Select availability</option>
+          <option>Less than 10 hours/week</option>
+          <option>10 – 20 hours/week</option>
+          <option>20 – 30 hours/week</option>
+          <option>30 – 40 hours/week</option>
+          <option>Full-time (40+ hours/week)</option>
+        </select>
+        <span class="err-msg" id="err-hours">Please select your availability.</span>
+      </div>
+
+      <div class="field-group">
+        <label for="start-date">When can you start? <span class="req">*</span></label>
+        <input type="text" id="start-date" name="start-date" placeholder="e.g. Immediately, July 1, 2026" required />
+        <span class="err-msg" id="err-start-date">Please indicate when you can start.</span>
+      </div>
+
+      <div class="field-group">
+        <label>How did you hear about this opportunity?</label>
+        <div class="options-grid" style="grid-template-columns: repeat(auto-fill, minmax(155px,1fr));">
+          <label class="option-item"><input type="radio" name="referral" value="Instagram" /><span>📸 Instagram</span></label>
+          <label class="option-item"><input type="radio" name="referral" value="Facebook" /><span>📘 Facebook</span></label>
+          <label class="option-item"><input type="radio" name="referral" value="Twitter/X" /><span>🐦 Twitter / X</span></label>
+          <label class="option-item"><input type="radio" name="referral" value="LinkedIn" /><span>💼 LinkedIn</span></label>
+          <label class="option-item"><input type="radio" name="referral" value="WhatsApp" /><span>💬 WhatsApp</span></label>
+          <label class="option-item"><input type="radio" name="referral" value="Friend/Referral" /><span>🤝 Friend/Referral</span></label>
+          <label class="option-item"><input type="radio" name="referral" value="Other" /><span>🔍 Other</span></label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="extra">Anything else you'd like us to know? <span class="hint">(optional)</span></label>
+        <textarea id="extra" name="extra" placeholder="Any additional info, questions, or special circumstances you'd like to share."></textarea>
+      </div>
+    </div>
+
+    <!-- Disclaimer & Submit -->
+    <div class="section-card" style="border-top-color: var(--gold);">
+      <div class="disclaimer">
+        <strong>Privacy Notice:</strong> The information you provide will be used solely for evaluating your internship application with Benbax Ventures Company Limited. Your data will not be shared with third parties. By submitting this form, you confirm that all information provided is accurate and complete.<br><br>
+        For enquiries, contact us at <strong>benbaxventures@gmail.com</strong> or call <strong>054 601 3031</strong>. Visit <strong>www.benbaxco.com</strong> for more information.
+      </div>
+
+      <div class="submit-area" style="margin-top: 24px;">
+        <button type="submit" id="submit-btn" class="btn-submit">Submit Application →</button>
+        <p class="submit-note">We review applications on a rolling basis. Shortlisted candidates will be contacted via email or WhatsApp.</p>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<!-- Success screen -->
+<div id="success-screen">
+  <div class="success-icon">🎉</div>
+  <div class="success-title">Application Received!</div>
+  <p class="success-msg">
+    Thank you for applying to the <span class="success-highlight">Benbax Software Development Internship</span>.<br><br>
+    Our team will review your application and reach out to shortlisted candidates within <strong>5–7 business days</strong> via email or WhatsApp.<br><br>
+    In the meantime, keep building. <span class="success-highlight">The future is AI-first, and you're already here.</span>
+  </p>
+  <p style="margin-top:24px; font-size:13px; color:var(--muted);">Questions? Email us at <a href="mailto:benbaxventures@gmail.com" style="color:var(--green-mid);">benbaxventures@gmail.com</a></p>
+</div>
+
+<!-- Floating toast notification -->
+<div id="toast" class="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  ⚙️  EMAILJS CONFIGURATION
+//  Replace the 3 placeholder values below, then save & host.
+//  See the setup guide above for step-by-step instructions.
+//  Get your keys at: https://www.emailjs.com
+// ═══════════════════════════════════════════════════════════════
+const EMAILJS_PUBLIC_KEY  = 'a5CzWiyLQADcsam7N';    // Account → General
+const EMAILJS_SERVICE_ID  = 'service_ffxsy0o';    // Email Services tab
+const EMAILJS_TEMPLATE_ID = 'template_xhzks63';   // Email Templates tab
+// ═══════════════════════════════════════════════════════════════
+
+const IS_CONFIGURED =
+  EMAILJS_PUBLIC_KEY  !== 'a5CzWiyLQADcsam7N'  &&
+  EMAILJS_SERVICE_ID  !== 'service_ffxsy0o'  &&
+  EMAILJS_TEMPLATE_ID !== 'template_xhzks63';
+
+if (IS_CONFIGURED) {
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+  document.getElementById('setup-guide').style.display = 'none';
+} else {
+  document.getElementById('setup-guide').style.display = 'block';
+}
+
+// ── EMAIL TEMPLATE (injected into the setup guide copy box) ────
+const EMAIL_TEMPLATE_HTML = `<div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto">
+<div style="background:#0d3d1e;padding:20px 24px;border-radius:8px 8px 0 0">
+<h2 style="color:#fff;margin:0;font-size:18px">&#127891; New Internship Application</h2>
+<p style="color:#f5c518;margin:4px 0 0;font-size:13px">Benbax Ventures Company Limited &mdash; Software Development Intern</p>
+</div>
+<div style="background:#fff;padding:24px;border:1px solid #ddd;border-top:none;border-radius:0 0 8px 8px">
+<table style="width:100%;border-collapse:collapse;font-size:14px">
+<tr><td colspan="2" style="background:#f4f6f2;padding:10px 12px;font-weight:bold;color:#0d3d1e;border-left:3px solid #f5c518">PERSONAL INFO</td></tr>
+<tr><td style="padding:8px 12px;color:#666;width:35%">Name</td><td style="padding:8px 12px"><b>{{applicant_name}}</b></td></tr>
+<tr style="background:#f9f9f9"><td style="padding:8px 12px;color:#666">Email</td><td style="padding:8px 12px"><a href="mailto:{{applicant_email}}">{{applicant_email}}</a></td></tr>
+<tr><td style="padding:8px 12px;color:#666">Phone</td><td style="padding:8px 12px">{{phone}}</td></tr>
+<tr style="background:#f9f9f9"><td style="padding:8px 12px;color:#666">Location</td><td style="padding:8px 12px">{{location}}</td></tr>
+<tr><td style="padding:8px 12px;color:#666">Age Group</td><td style="padding:8px 12px">{{age_group}}</td></tr>
+<tr><td colspan="2" style="background:#f4f6f2;padding:10px 12px;font-weight:bold;color:#0d3d1e;border-left:3px solid #f5c518">EDUCATION</td></tr>
+<tr style="background:#f9f9f9"><td style="padding:8px 12px;color:#666">Level</td><td style="padding:8px 12px">{{education}}</td></tr>
+<tr><td style="padding:8px 12px;color:#666">School</td><td style="padding:8px 12px">{{school}}</td></tr>
+<tr style="background:#f9f9f9"><td style="padding:8px 12px;color:#666">Program</td><td style="padding:8px 12px">{{program}}</td></tr>
+<tr><td style="padding:8px 12px;color:#666">Coding Exp.</td><td style="padding:8px 12px">{{experience}}</td></tr>
+<tr><td colspan="2" style="background:#f4f6f2;padding:10px 12px;font-weight:bold;color:#0d3d1e;border-left:3px solid #f5c518">TECHNICAL SKILLS</td></tr>
+<tr style="background:#f9f9f9"><td style="padding:8px 12px;color:#666">Role Focus</td><td style="padding:8px 12px">{{dev_role}}</td></tr>
+<tr><td style="padding:8px 12px;color:#666">Tech Stack</td><td style="padding:8px 12px">{{tech_stack}}</td></tr>
+<tr style="background:#f9f9f9"><td style="padding:8px 12px;color:#666">AI Tools</td><td style="padding:8px 12px">{{ai_tools}}</td></tr>
+<tr><td style="padding:8px 12px;color:#666">JS Level</td><td style="padding:8px 12px">{{js_level}}</td></tr>
+<tr><td colspan="2" style="background:#f4f6f2;padding:10px 12px;font-weight:bold;color:#0d3d1e;border-left:3px solid #f5c518">PORTFOLIO</td></tr>
+<tr style="background:#f9f9f9"><td style="padding:8px 12px;color:#666">GitHub</td><td style="padding:8px 12px">{{github_url}}</td></tr>
+<tr><td style="padding:8px 12px;color:#666">Portfolio</td><td style="padding:8px 12px">{{portfolio_url}}</td></tr>
+<tr style="background:#f9f9f9"><td style="padding:8px 12px;color:#666">LinkedIn</td><td style="padding:8px 12px">{{linkedin_url}}</td></tr>
+<tr><td colspan="2" style="background:#f4f6f2;padding:10px 12px;font-weight:bold;color:#0d3d1e;border-left:3px solid #f5c518">AVAILABILITY</td></tr>
+<tr><td style="padding:8px 12px;color:#666">Hours / Week</td><td style="padding:8px 12px">{{availability}}</td></tr>
+<tr style="background:#f9f9f9"><td style="padding:8px 12px;color:#666">Start Date</td><td style="padding:8px 12px">{{start_date}}</td></tr>
+<tr><td style="padding:8px 12px;color:#666">Heard From</td><td style="padding:8px 12px">{{referral_source}}</td></tr>
+</table>
+<div style="margin-top:16px;padding:14px;background:#f4f6f2;border-radius:6px;border-left:3px solid #1a5c2e">
+<b style="color:#0d3d1e;font-size:13px">PROJECT DESCRIPTION</b>
+<p style="margin:8px 0 0;font-size:14px;line-height:1.6;color:#333">{{project_description}}</p>
+</div>
+<div style="margin-top:10px;padding:14px;background:#f4f6f2;border-radius:6px;border-left:3px solid #1a5c2e">
+<b style="color:#0d3d1e;font-size:13px">WHY BENBAX?</b>
+<p style="margin:8px 0 0;font-size:14px;line-height:1.6;color:#333">{{why_benbax}}</p>
+</div>
+<div style="margin-top:10px;padding:14px;background:#fffde7;border-radius:6px;border-left:3px solid #f5c518">
+<b style="color:#0d3d1e;font-size:13px">ADDITIONAL NOTES</b>
+<p style="margin:8px 0 0;font-size:14px;line-height:1.6;color:#333">{{additional_info}}</p>
+</div>
+</div>
+<p style="text-align:center;font-size:11px;color:#aaa;margin-top:12px">Sent via Benbax Internship Application Form &middot; www.benbaxco.com</p>
+</div>`;
+
+document.getElementById('email-template-code').textContent = EMAIL_TEMPLATE_HTML;
+
+// ── PROGRESS BAR ───────────────────────────────────────────────
+const requiredFields = ['fname','lname','email','phone','location','age-group','education','experience','project-desc','why-benbax','hours','start-date'];
+
+function updateProgress() {
+  let filled = 0;
+  requiredFields.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.value.trim()) filled++;
+  });
+  if (document.querySelector('input[name="dev-role"]:checked')) filled++;
+  if (document.querySelectorAll('input[name="tech"]:checked').length) filled++;
+  const total = requiredFields.length + 2;
+  const pct = Math.round((filled / total) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+}
+document.getElementById('appForm').addEventListener('input', updateProgress);
+updateProgress();
+
+// ── FILE NAME DISPLAY ──────────────────────────────────────────
+document.getElementById('resume').addEventListener('change', function() {
+  const fn = document.getElementById('file-name');
+  if (this.files[0]) { fn.textContent = '✓ ' + this.files[0].name; fn.style.display = 'block'; }
+  else { fn.style.display = 'none'; }
+});
+
+// ── TOAST ──────────────────────────────────────────────────────
+function showToast(msg, type = 'error') {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.className = 'toast show ' + type;
+  setTimeout(() => toast.classList.remove('show'), 6000);
+}
+
+// ── VALIDATION ─────────────────────────────────────────────────
+function validateForm() {
+  let valid = true;
+  const fields = [
+    {id:'fname',        errId:'err-fname'},
+    {id:'lname',        errId:'err-lname'},
+    {id:'email',        errId:'err-email'},
+    {id:'phone',        errId:'err-phone'},
+    {id:'location',     errId:'err-location'},
+    {id:'age-group',    errId:'err-age-group'},
+    {id:'education',    errId:'err-education'},
+    {id:'experience',   errId:'err-experience'},
+    {id:'project-desc', errId:'err-project-desc'},
+    {id:'why-benbax',   errId:'err-why-benbax'},
+    {id:'hours',        errId:'err-hours'},
+    {id:'start-date',   errId:'err-start-date'},
+  ];
+  fields.forEach(({id, errId}) => {
+    const el  = document.getElementById(id);
+    const err = document.getElementById(errId);
+    if (!el.value.trim()) {
+      el.classList.add('invalid'); err.classList.add('show'); valid = false;
+    } else {
+      el.classList.remove('invalid'); err.classList.remove('show');
+    }
+  });
+  // Email format
+  const emailEl = document.getElementById('email');
+  if (emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+    emailEl.classList.add('invalid');
+    document.getElementById('err-email').classList.add('show');
+    valid = false;
+  }
+  // Dev role
+  const roleErr = document.getElementById('err-dev-role');
+  if (!document.querySelector('input[name="dev-role"]:checked')) {
+    roleErr.classList.add('show'); valid = false;
+  } else { roleErr.classList.remove('show'); }
+  // Tech stack
+  const techErr = document.getElementById('err-tech');
+  if (!document.querySelectorAll('input[name="tech"]:checked').length) {
+    techErr.classList.add('show'); valid = false;
+  } else { techErr.classList.remove('show'); }
+  return valid;
+}
+
+// ── FORM SUBMIT → EMAILJS ──────────────────────────────────────
+document.getElementById('appForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  if (!validateForm()) {
+    const firstErr = document.querySelector('.invalid, .err-msg.show');
+    if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  if (!IS_CONFIGURED) {
+    showToast('⚠️ EmailJS is not configured yet. See the setup guide at the top of the page.', 'error');
+    document.getElementById('setup-guide').style.display = 'block';
+    document.getElementById('setup-guide').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+
+  // Collect form data
+  const fd   = new FormData(this);
+  const tech = [...document.querySelectorAll('input[name="tech"]:checked')].map(el => el.value).join(', ') || 'None selected';
+  const ai   = [...document.querySelectorAll('input[name="ai-tools"]:checked')].map(el => el.value).join(', ') || 'None selected';
+  const js   = document.querySelector('input[name="js-level"]:checked')?.value || 'Not rated';
+  const role = document.querySelector('input[name="dev-role"]:checked')?.value  || 'Not specified';
+  const ref  = document.querySelector('input[name="referral"]:checked')?.value  || 'Not specified';
+
+  const templateParams = {
+    applicant_name:      `${fd.get('fname')} ${fd.get('lname')}`,
+    applicant_email:     fd.get('email'),
+    phone:               fd.get('phone'),
+    location:            fd.get('location'),
+    age_group:           fd.get('age-group'),
+    education:           fd.get('education'),
+    school:              fd.get('school')    || 'Not provided',
+    program:             fd.get('program')   || 'Not provided',
+    experience:          fd.get('experience'),
+    dev_role:            role,
+    tech_stack:          tech,
+    ai_tools:            ai,
+    js_level:            js + ' / 5 stars',
+    github_url:          fd.get('github')    || 'Not provided',
+    portfolio_url:       fd.get('portfolio') || 'Not provided',
+    linkedin_url:        fd.get('linkedin')  || 'Not provided',
+    project_description: fd.get('project-desc'),
+    why_benbax:          fd.get('why-benbax'),
+    availability:        fd.get('hours'),
+    start_date:          fd.get('start-date'),
+    referral_source:     ref,
+    additional_info:     fd.get('extra') || 'None',
+    reply_to:            fd.get('email'),
+  };
+
+  // Button → loading state
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="btn-spinner"></span> Sending…';
+
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+    // ✅ Success — show confirmation screen
+    document.getElementById('form-container').style.display  = 'none';
+    document.querySelector('.progress-bar-wrap').style.display = 'none';
+    document.getElementById('setup-guide').style.display    = 'none';
+    const s = document.getElementById('success-screen');
+    s.style.display = 'block';
+    s.scrollIntoView({ behavior: 'smooth' });
+  } catch (err) {
+    console.error('EmailJS error:', err);
+    btn.disabled = false;
+    btn.innerHTML = 'Submit Application →';
+    showToast('❌ Submission failed. Please try again or email benbaxventures@gmail.com directly.', 'error');
+  }
+});
+
+// ── CLEAR INVALID ON INPUT ─────────────────────────────────────
+document.querySelectorAll('input, select, textarea').forEach(el => {
+  el.addEventListener('input', () => {
+    el.classList.remove('invalid');
+    const errEl = document.getElementById('err-' + el.id);
+    if (errEl) errEl.classList.remove('show');
+  });
+});
+
+// ── TEMPLATE TOGGLE & COPY ─────────────────────────────────────
+function toggleTemplate() {
+  const box  = document.getElementById('template-box');
+  const btn  = document.getElementById('toggle-template-btn');
+  const open = box.style.display !== 'none';
+  box.style.display = open ? 'none' : 'block';
+  btn.textContent   = open ? '▼ Show email template HTML to copy' : '▲ Hide template';
+}
+
+function copyEmailTemplate() {
+  const text = document.getElementById('email-template-code').textContent;
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      const btn = document.getElementById('copy-template-btn');
+      btn.textContent = '✓ Copied!';
+      btn.style.background = '#1a5c2e';
+      setTimeout(() => { btn.textContent = '📋 Copy Template HTML'; btn.style.background = ''; }, 2500);
+    })
+    .catch(() => showToast('Could not auto-copy. Please select the text and copy manually.', 'error'));
+}
+</script>
+</body>
+</html>
